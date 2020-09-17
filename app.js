@@ -11,6 +11,39 @@ app.use(express.urlencoded({ extended: true }));
 //    public directory
 app.use(express.static( "public" ));
 
+// use mongoose, connect to mongo DB
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/cafe_rater', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Connected to DB!'))
+.catch(error => console.log(error.message));
+
+// Schema - will move later
+const cafeSchema = new mongoose.Schema({
+	name: String,
+	image: String
+});
+
+// Model - convert Schema to model
+const Cafe = mongoose.model("Cafe", cafeSchema);
+
+// Cafe.create(
+// 	{
+// 		name: "Starbucks",
+// 		image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQOF5bRSHAkAW2Xmsmlckd7ONYz4Gx6HIyUKA&usqp=CAU"
+// 	}, function(err, cafe){
+// 		if(err){
+// 			console.log("error");
+// 		}
+// 		else{
+// 			console.log("Added cafe to DB");
+// 			console.log(cafe)
+// 		}
+// 	}
+// );
+
 
 
 //cafe array
