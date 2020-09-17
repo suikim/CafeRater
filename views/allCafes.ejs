@@ -1,0 +1,29 @@
+<%- include ("partials/header") %>
+
+<div class="container">
+	
+	<header class="jumbotron mt-3">
+		<h1> Welcome to Cafe Rater </h1>
+		<p> Search through some of the best rated coffee spots in the world! </p>
+		<a class="btn btn-primary" href="/allCafes/new" role="button">Add New Cafe</a>
+	</header>
+
+	<div class="container">
+		<div class="row" >
+			<% cafes.forEach(function(cafe){ %>
+				<div class="col-sm-6 col-md-4 col-lg-3 p-1">
+					<div class="card h-100 text-center" >
+						<img src="<%= cafe.image %>" class="card-img-top img-thumbnail border-0 p-2">
+						<div class="card-body ">
+					 		<p class="card-text"> <%= cafe.name %> </p>
+						</div>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+
+	
+</div>
+
+<%- include ("partials/footer") %>
