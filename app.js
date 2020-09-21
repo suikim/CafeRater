@@ -1,4 +1,4 @@
-
+ 
 var express = require("express");
 var app = express();
 // to render template files, don't have to type out .ejs, just filename
@@ -23,7 +23,8 @@ mongoose.connect('mongodb://localhost/cafe_rater', {
 // Schema - will move later
 const cafeSchema = new mongoose.Schema({
 	name: String,
-	image: String
+	image: String,
+	description: String
 });
 
 // Model - convert Schema to model
@@ -34,19 +35,19 @@ app.get("/", function(req, res){
 	res.render("landing");
 });
 
-//page to see all cafes
+//INDEX, page to see all cafes
 app.get("/allCafes", function(req, res){
 	// get all cafes from DB
 	Cafe.find({}, function(err, cafeList){
 		if (err){ console.log(err); }
 		else{
-			res.render("allCafes", {cafes: cafeList});
+			res.render("index", {cafes: cafeList});
 		}
 	})
 });
 
-// rest convention: post request should be same route as page that shows objects that its adding
-// form to add cafe to array
+// CREATE
+// add cafe to db
 app.post("/allCafes", function(req, res){
 	console.log("Post a cafe!")
 	//var cafeName = req.body.cafeName;
@@ -60,10 +61,10 @@ app.post("/allCafes", function(req, res){
 		}
 	});	
 	//default redirects to get request
-	res.redirect("/allCafes");
+	res.redirect("/index");
 });
 
-//restful convention
+//NEW, form to create new cafe
 app.get("/allCafes/new", function(req, res){
 	res.render("newCafe");
 }); 
